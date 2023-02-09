@@ -14,12 +14,7 @@ from aiogram.types import BotCommand
 
 async def set_commands(bot: Bot):
     commands = [
-        BotCommand(command="/add_spending", description="Add new spending"),
-        BotCommand(command="/show_last_spending", description="Show last spending"),
-        BotCommand(command="/remove_last_spending", description="Remove last spending"),
-        BotCommand(command="/weather", description="Check local weather"),
-        BotCommand(command="/fine", description="Check fines"),
-        BotCommand(command="/start", description="Welcome Message"),
+        BotCommand(command="/start", description="Show available commands"),
         BotCommand(command="/cancel", description="Cancel any action"),
     ]
     await bot.set_my_commands(commands)
@@ -31,8 +26,7 @@ async def main():
 
     load_dotenv()
     API_TOKEN = os.getenv("TELE_TOKEN", "")
-    ADMIN_IDS = [os.getenv("USER_ONE", ""),
-                 os.getenv("USER_TWO", "")]
+    ADMIN_IDS = os.getenv("APPROVED_USERS", "").split(", ")
 
     bot = Bot(token=API_TOKEN)
     dp = Dispatcher(bot, storage=MemoryStorage())
